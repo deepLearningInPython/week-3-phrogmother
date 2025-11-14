@@ -16,8 +16,10 @@ import numpy as np
 # -----------------------------------------------
 
 def compute_output_size_1d(input_array, kernel_array):
-    pass
-
+    input_length = len(input_array)
+    kernel_length = len(kernel_array)
+    output = input_length - kernel_length + 1
+    return output
 
 # -----------------------------------------------
 # Example:
@@ -37,7 +39,13 @@ print(compute_output_size_1d(input_array, kernel_array))
 def convolve_1d(input_array, kernel_array):
     # Tip: start by initializing an empty output array (you can use your function above to calculate the correct size).
     # Then fill the cells in the array with a loop.
-    pass
+    size = compute_output_size_1d(input_array, kernel_array)
+    output = []
+    for i in range(size):
+        c = input_array[i: i+len(kernel_array)]
+        add = np.sum(kernel_array*c)
+        output.append(add)
+    return output 
 
 # -----------------------------------------------
 # Another tip: write test cases like this, so you can easily test your function.
@@ -56,7 +64,12 @@ print(convolve_1d(input_array, kernel_array))
 # -----------------------------------------------
 
 def compute_output_size_2d(input_matrix, kernel_matrix):
-    pass
+    input_height = len(input_matrix)
+    input_width = len(input_matrix[0])
+    kernel_height = len(kernel_matrix)
+    kernel_width = len(kernel_matrix[0])
+    output = input_height - kernel_height + 1, input_width - kernel_width + 1
+    return output
 
 
 # -----------------------------------------------
