@@ -58,7 +58,7 @@ print(convolve_1d(input_array, kernel_array))
 # Write a function that takes two two-dimensional numpy matrices (input_matrix, kernel_matrix) as arguments.
 # The function should return a tuple with the dimensions of the convolution of both matrices.
 # The dimensions of the output (assuming no padding and a stride of one) can be computed as follows:
-# (input_height - kernel_height + 1, input_width - kernel_width + 1)
+# (input_height - kernel_height + 1, input_width - kernel_widthidth + 1)
 
 # Your code here:
 # -----------------------------------------------
@@ -85,7 +85,14 @@ def compute_output_size_2d(input_matrix, kernel_matrix):
 def convolute_2d(input_matrix, kernel_matrix):
     # Tip: same tips as above, but you might need a nested loop here in order to
     # define which parts of the input matrix need to be multiplied with the kernel matrix.
-    pass
-
+    output_height, output_width = compute_output_size_2d(input_matrix, kernel_matrix)
+    output = np.zeros((output_height, output_width))
+    kernel_height = len(kernel_matrix)
+    kernel_width = len(kernel_matrix[0])
+    for i in range(output_height):
+        for k in range(output_width):
+            c = input_matrix[i : i+kernel_height, k : k+kernel_width]
+            output[i, k] = np.sum(c * kernel_matrix)
+    return output
 
 # -----------------------------------------------
